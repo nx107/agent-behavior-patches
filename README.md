@@ -20,7 +20,7 @@ The verifier reads data. It does **not** execute fixture commands, shell text, M
 
 ## Quickstart
 
-Requirements: Node.js 20 or newer and pnpm 11.
+Requirements: Node.js 20 or newer and pnpm 10.
 
 ```sh
 pnpm install --frozen-lockfile

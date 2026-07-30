@@ -21,5 +21,6 @@ All notable project changes are documented here. The format follows Keep a Chang
 - Added semantic result validation, duplicate case/result ID rejection, strict trace identity/condition checks in `compare`, hardened SemVer parsing, and machine-readable fatal JSON errors.
 - Expanded multi-OS CI with SHA-pinned actions, schema drift checks, audit, complete quality gates, CLI positive/negative smoke tests, and package dry-run.
 - Closed final-review defense-in-depth findings: consistent trace-verification counters, exit `0` for help/version, hardlink output rejection, and an 8 MiB structured-input limit.
+- Pinned pnpm 10.34.5 so the declared Node.js 20 minimum remains valid in local and CI environments.
 
 [Unreleased]: https://github.com/nx107/agent-behavior-patches/commits/main
