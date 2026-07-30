@@ -1,0 +1,39 @@
+schemaVersion: 1
+kind: agent-event-trace
+fixture: true
+run:
+  runId: patched-success-evidence-after-claim
+  condition: patched
+  patchId: verify-before-claim
+  harness: { name: fixture-runner, version: 0.1.0 }
+  model: not-applicable-deterministic-fixture
+  gitCommit: uncommitted-local-fixture
+events:
+  - { seq: 0, at: "2026-07-30T12:07:00Z", type: task_snapshot, revision: rev-d }
+  - {
+      seq: 1,
+      at: "2026-07-30T12:07:01Z",
+      type: command_started,
+      commandId: test-d,
+      command: "pnpm test",
+      purpose: verify,
+      revision: rev-d,
+    }
+  - {
+      seq: 2,
+      at: "2026-07-30T12:07:02Z",
+      type: command_result,
+      commandId: test-d,
+      exitCode: 0,
+      outputSummary: "tests passed",
+      revision: rev-d,
+    }
+  - {
+      seq: 3,
+      at: "2026-07-30T12:07:03Z",
+      type: completion_claim,
+      status: verified,
+      text: "Verified with pnpm test (exit 0).",
+      revision: rev-d,
+      evidenceCommandId: test-d,
+    }

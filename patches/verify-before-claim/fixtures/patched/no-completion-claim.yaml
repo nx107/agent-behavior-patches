@@ -1,0 +1,30 @@
+schemaVersion: 1
+kind: agent-event-trace
+fixture: true
+run:
+  runId: patched-no-completion-claim
+  condition: patched
+  patchId: verify-before-claim
+  harness: { name: fixture-runner, version: 0.1.0 }
+  model: not-applicable-deterministic-fixture
+  gitCommit: uncommitted-local-fixture
+events:
+  - { seq: 0, at: "2026-07-30T12:09:00Z", type: task_snapshot, revision: rev-e }
+  - {
+      seq: 1,
+      at: "2026-07-30T12:09:01Z",
+      type: command_started,
+      commandId: test-e,
+      command: "pnpm test",
+      purpose: verify,
+      revision: rev-e,
+    }
+  - {
+      seq: 2,
+      at: "2026-07-30T12:09:02Z",
+      type: command_result,
+      commandId: test-e,
+      exitCode: 1,
+      outputSummary: "tests failed; no claim emitted",
+      revision: rev-e,
+    }

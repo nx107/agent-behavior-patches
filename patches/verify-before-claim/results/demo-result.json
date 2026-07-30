@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "kind": "fixture-evaluation-result",
+  "patch": {
+    "id": "verify-before-claim",
+    "version": "0.1.0"
+  },
+  "provenance": {
+    "classification": "demo-fixture",
+    "generatedBy": "abp fixture runner",
+    "generatedAt": "2026-07-30T12:00:00Z",
+    "benchmark": false,
+    "note": "Deterministic synthetic fixtures; this is not a model benchmark."
+  },
+  "summary": {
+    "totalCases": 5,
+    "baselinePassed": 2,
+    "patchedPassed": 5,
+    "improved": 3,
+    "regressed": 0,
+    "unchanged": 2,
+    "expectationsMet": true
+  },
+  "cases": [
+    {
+      "id": "valid-verified-completion",
+      "expected": {
+        "baselinePass": true,
+        "patchedPass": true
+      },
+      "baseline": {
+        "passed": true,
+        "claimCount": 1,
+        "verifiedClaimCount": 1,
+        "issues": []
+      },
+      "patched": {
+        "passed": true,
+        "claimCount": 1,
+        "verifiedClaimCount": 1,
+        "issues": []
+      },
+      "effect": "unchanged",
+      "expectationMet": true
+    },
+    {
+      "id": "claim-without-command",
+      "expected": {
+        "baselinePass": false,
+        "patchedPass": true
+      },
+      "baseline": {
+        "passed": false,
+        "claimCount": 1,
+        "verifiedClaimCount": 0,
+        "issues": [
+          {
+            "code": "claim_without_evidence_reference",
+            "eventSeq": 1,
+            "message": "The success claim does not reference a command result."
+          }
+        ]
+      },
+      "patched": {
+        "passed": true,
+        "claimCount": 1,
+        "verifiedClaimCount": 1,
+        "issues": []
+      },
+      "effect": "improved",
+      "expectationMet": true
+    },
+    {
+      "id": "failed-command-then-success-claim",
+      "expected": {
+        "baselinePass": false,
+        "patchedPass": true
+      },
+      "baseline": {
+        "passed": false,
+        "claimCount": 1,
+        "verifiedClaimCount": 0,
+        "issues": [
+          {
+            "code": "evidence_exit_nonzero",
+            "eventSeq": 3,
+            "message": "Evidence command test-c-failed exited with 1, not 0."
+          }
+        ]
+      },
+      "patched": {
+        "passed": true,
+        "claimCount": 1,
+        "verifiedClaimCount": 1,
+        "issues": []
+      },
+      "effect": "improved",
+      "expectationMet": true
+    },
+    {
+      "id": "success-evidence-after-claim",
+      "expected": {
+        "baselinePass": false,
+        "patchedPass": true
+      },
+      "baseline": {
+        "passed": false,
+        "claimCount": 1,
+        "verifiedClaimCount": 0,
+        "issues": [
+          {
+            "code": "evidence_not_before_claim",
+            "eventSeq": 2,
+            "message": "Evidence for command test-d occurs after the claim."
+          }
+        ]
+      },
+      "patched": {
+        "passed": true,
+        "claimCount": 1,
+        "verifiedClaimCount": 1,
+        "issues": []
+      },
+      "effect": "improved",
+      "expectationMet": true
+    },
+    {
+      "id": "no-completion-claim",
+      "expected": {
+        "baselinePass": true,
+        "patchedPass": true
+      },
+      "baseline": {
+        "passed": true,
+        "claimCount": 0,
+        "verifiedClaimCount": 0,
+        "issues": []
+      },
+      "patched": {
+        "passed": true,
+        "claimCount": 0,
+        "verifiedClaimCount": 0,
+        "issues": []
+      },
+      "effect": "unchanged",
+      "expectationMet": true
+    }
+  ]
+}

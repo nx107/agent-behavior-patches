@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Node 20 / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+        with:
+          version: 11.18.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - name: Install from lockfile
+        run: pnpm install --frozen-lockfile
+      - name: Regenerate schemas and reject drift
+        run: pnpm schemas:check
+      - name: Audit dependencies
+        run: pnpm audit --audit-level=high
+      - name: Full quality gate
+        run: pnpm check
+      - name: CLI validate
+        run: node dist/cli.js validate patches/verify-before-claim --json
+      - name: CLI test
+        run: node dist/cli.js test patches/verify-before-claim --json
+      - name: CLI compare
+        run: node dist/cli.js compare patches/verify-before-claim/fixtures/baseline/claim-without-command.yaml patches/verify-before-claim/fixtures/patched/claim-without-command.yaml --patch patches/verify-before-claim/patch.yaml --json
+      - name: Invalid input must exit nonzero
+        shell: bash
+        run: |
+          if node dist/cli.js validate test/fixtures/invalid-trace.yaml --json; then
+            echo "invalid input unexpectedly exited zero" >&2
+            exit 1
+          fi
+      - name: Package dry run
+        run: pnpm pack --dry-run

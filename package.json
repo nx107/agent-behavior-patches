@@ -1,0 +1,67 @@
+{
+  "name": "agent-behavior-patches",
+  "version": "0.1.0",
+  "description": "Deterministic, testable behavior patches for AI agents.",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "abp": "./dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "schemas",
+    "patches"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "schemas": "tsx scripts/generate-schemas.ts && prettier --write schemas",
+    "schemas:check": "pnpm schemas && git diff --exit-code -- schemas",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@11.18.0",
+  "keywords": [
+    "ai-agents",
+    "behavior-testing",
+    "reliability",
+    "verification"
+  ],
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nx107/agent-behavior-patches.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nx107/agent-behavior-patches/issues"
+  },
+  "homepage": "https://github.com/nx107/agent-behavior-patches#readme",
+  "dependencies": {
+    "commander": "^14.0.2",
+    "yaml": "^2.8.2",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@types/node": "^24.10.12",
+    "eslint": "^9.39.2",
+    "prettier": "^3.8.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.55.0",
+    "vitest": "3.2.7"
+  }
+}

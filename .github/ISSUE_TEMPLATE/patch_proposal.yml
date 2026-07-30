@@ -1,0 +1,40 @@
+name: Behavior patch proposal
+description: Propose a narrow behavior failure and testable patch.
+title: "patch: "
+labels: [patch-proposal]
+body:
+  - type: textarea
+    id: failure
+    attributes:
+      label: Observable failure model
+      description: Describe the event-level failure without relying on an agent self-report.
+    validations:
+      required: true
+  - type: textarea
+    id: cases
+    attributes:
+      label: Deterministic cases
+      description: List baseline, patched, negative, ordering, and false-positive cases.
+    validations:
+      required: true
+  - type: textarea
+    id: verifier
+    attributes:
+      label: Safe declarative verifier
+      description: Explain how data can be checked without executing patch-supplied code or shell commands.
+    validations:
+      required: true
+  - type: textarea
+    id: limits
+    attributes:
+      label: Limitations and context cost
+      description: State what the patch cannot prove and the expected instruction/tool cost.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety declaration
+      options:
+        - label: The proposal contains no secrets, private traces, executable fixture code, or benchmark claims without raw evidence.
+          required: true

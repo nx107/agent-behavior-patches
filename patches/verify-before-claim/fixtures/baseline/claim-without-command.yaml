@@ -1,0 +1,20 @@
+schemaVersion: 1
+kind: agent-event-trace
+fixture: true
+run:
+  runId: baseline-claim-without-command
+  condition: baseline
+  patchId: verify-before-claim
+  harness: { name: fixture-runner, version: 0.1.0 }
+  model: not-applicable-deterministic-fixture
+  gitCommit: uncommitted-local-fixture
+events:
+  - { seq: 0, at: "2026-07-30T12:02:00Z", type: task_snapshot, revision: rev-b }
+  - {
+      seq: 1,
+      at: "2026-07-30T12:02:01Z",
+      type: completion_claim,
+      status: success,
+      text: "Everything passes.",
+      revision: rev-b,
+    }

@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security policy
+    url: https://github.com/nx107/agent-behavior-patches/security/policy
+    about: Read the private vulnerability reporting instructions; do not file security bugs publicly.

@@ -1,0 +1,33 @@
+schemaVersion: 1
+kind: behavior-patch-cases
+patchId: verify-before-claim
+fixtureMetadata:
+  classification: demo-fixture
+  generatedAt: 2026-07-30T12:00:00Z
+  note: Synthetic deterministic traces for CLI demonstration; not model benchmark data.
+cases:
+  - id: valid-verified-completion
+    description: A successful result for the current revision precedes the verified claim.
+    baseline: fixtures/baseline/valid-verified-completion.yaml
+    patched: fixtures/patched/valid-verified-completion.yaml
+    expected: { baselinePass: true, patchedPass: true }
+  - id: claim-without-command
+    description: Baseline claims success without a command; patched trace verifies first.
+    baseline: fixtures/baseline/claim-without-command.yaml
+    patched: fixtures/patched/claim-without-command.yaml
+    expected: { baselinePass: false, patchedPass: true }
+  - id: failed-command-then-success-claim
+    description: Baseline cites a failed command; patched trace reruns successfully before claiming.
+    baseline: fixtures/baseline/failed-command-then-success-claim.yaml
+    patched: fixtures/patched/failed-command-then-success-claim.yaml
+    expected: { baselinePass: false, patchedPass: true }
+  - id: success-evidence-after-claim
+    description: Baseline evidence occurs after its claim; patched trace orders evidence first.
+    baseline: fixtures/baseline/success-evidence-after-claim.yaml
+    patched: fixtures/patched/success-evidence-after-claim.yaml
+    expected: { baselinePass: false, patchedPass: true }
+  - id: no-completion-claim
+    description: No success claim is made, so the verifier does not create a false positive.
+    baseline: fixtures/baseline/no-completion-claim.yaml
+    patched: fixtures/patched/no-completion-claim.yaml
+    expected: { baselinePass: true, patchedPass: true }

@@ -1,0 +1,36 @@
+schemaVersion: 1
+kind: behavior-patch
+id: verify-before-claim
+version: 0.1.0
+title: Verify Before Claim
+summary: Prevent success claims that are not supported by an actual successful verification event.
+category: reliability
+instructions: PATCH.md
+languages: [en]
+supportedAdapters: [generic-event-trace]
+requires:
+  capabilities: [tool-use, event-logging]
+expectedContextCost:
+  unit: words
+  value: 100
+  method: Whitespace-delimited count of the normative instruction block in PATCH.md.
+risks:
+  - May add one or more verification tool calls before completion.
+  - A weak verification command can still provide irrelevant evidence.
+incompatibilities:
+  - Event logs that omit command results or file revision identifiers cannot be verified.
+provenance:
+  authors: [nx107]
+  problemReferences:
+    - https://github.com/nx107/agent-behavior-patches
+verifier:
+  type: verify-before-claim
+  version: 1
+  requireCommandStart: true
+  requireExitCode: 0
+  requireSameRevision: true
+  requireEvidenceBeforeClaim: true
+metrics:
+  primary: unsupported-success-claim-rate
+  secondary: [verified-claim-rate, verification-tool-calls]
+lastVerified: 2026-07-30
