@@ -4,6 +4,8 @@ All notable project changes are documented here. The format follows Keep a Chang
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-07-30
+
 ### Added
 
 - Local v0.1.0 implementation with strict TypeScript, Zod schemas, and generated JSON Schema.
@@ -24,4 +26,5 @@ All notable project changes are documented here. The format follows Keep a Chang
 - Pinned pnpm 10.34.5 so the declared Node.js 20 minimum remains valid in local and CI environments.
 - Enforced LF checkouts across platforms and upgraded all SHA-pinned GitHub Actions to their Node 24-based current releases.
 
-[Unreleased]: https://github.com/nx107/agent-behavior-patches/commits/main
+[Unreleased]: https://github.com/nx107/agent-behavior-patches/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/nx107/agent-behavior-patches/releases/tag/v0.1.0
